@@ -1,22 +1,22 @@
-#include <stdio.h>
+п»ї#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <conio.h>
 #include <graphics.h>
 #include <vector>
 
-int Nastup = 0; // режим "Наступления"
-int NX = 0, NY = 0; // координаты наступления
+int Nastup = 0; // СЂРµР¶РёРј "РќР°СЃС‚СѓРїР»РµРЅРёСЏ"
+int NX = 0, NY = 0; // РєРѕРѕСЂРґРёРЅР°С‚С‹ РЅР°СЃС‚СѓРїР»РµРЅРёСЏ
 class Map{
       private:
              int matrix[11][11];
-             int xM, yM; // координаты поля
-             int k; // количество кораблей
+             int xM, yM; // РєРѕРѕСЂРґРёРЅР°С‚С‹ РїРѕР»СЏ
+             int k; // РєРѕР»РёС‡РµСЃС‚РІРѕ РєРѕСЂР°Р±Р»РµР№
       public:
              int GetK(){ return k; }
              int MinusK(){ this->k--; }
              void Draw(){
-                  char* massC[12] = {"1","2","3","4","5","6","7","8","9","10"," "," "}; // массив цифр
+                  char* massC[12] = {"1","2","3","4","5","6","7","8","9","10"," "," "}; // РјР°СЃСЃРёРІ С†РёС„СЂ
                   for(int i = 0; i <= 275; i+=25){
                           outtextxy(xM+i+25+5,yM+5,massC[i/25]);
                           outtextxy(xM+5,yM+i+25+5,massC[i/25]);
@@ -27,7 +27,7 @@ class Map{
                   }     
                   for(int i = 0; i <= 10; i++){
                           for(int j = 0; j <= 10; j++){
-                                  if(matrix[i][j]==1){  // 1 - cвой корабль, 2 - утопленник, 4 - неактивная ячейка, 3 - враг, 6 - мимо, 5 - попадание
+                                  if(matrix[i][j]==1){  // 1 - cРІРѕР№ РєРѕСЂР°Р±Р»СЊ, 2 - СѓС‚РѕРїР»РµРЅРЅРёРє, 4 - РЅРµР°РєС‚РёРІРЅР°СЏ СЏС‡РµР№РєР°, 3 - РІСЂР°Рі, 6 - РјРёРјРѕ, 5 - РїРѕРїР°РґР°РЅРёРµ
                                        bar(i*25+xM+25,j*25+yM+25,i*25+xM+50,j*25+yM+50);        
                                   } else if(matrix[i][j]==5){
                                        setfillstyle(1,GREEN);
@@ -55,7 +55,7 @@ class Map{
                    Draw();
              }
              int SetYa(int x, int y, int P, int status, int Z){ 
-                  if(P == 1){ // Z - чем заполнить ячейку 
+                  if(P == 1){ // Z - С‡РµРј Р·Р°РїРѕР»РЅРёС‚СЊ СЏС‡РµР№РєСѓ 
                        if(matrix[x-1][y-1] != 1 && matrix[x-1][y-1] != 4){ 
                        for(int i = x-2; i <= x; i++){
                                if(i == -1 || i == 10) continue;
@@ -224,9 +224,9 @@ class Map{
 
 class Ship{
       protected:
-             int pr; // принадлежность к определенному полю
-             int x,y; // координаты коробля
-             int status; // 0 - мертв, 1 - живой
+             int pr; // РїСЂРёРЅР°РґР»РµР¶РЅРѕСЃС‚СЊ Рє РѕРїСЂРµРґРµР»РµРЅРЅРѕРјСѓ РїРѕР»СЋ
+             int x,y; // РєРѕРѕСЂРґРёРЅР°С‚С‹ РєРѕСЂРѕР±Р»СЏ
+             int status; // 0 - РјРµСЂС‚РІ, 1 - Р¶РёРІРѕР№
       public:
              void Init(int xT, int yT, int prT){
                     this->x = xT; 
@@ -238,7 +238,7 @@ class Ship{
                   status = 0;     
              }
 };
-class Ship_1:public Ship{ // однопалубные корабли
+class Ship_1:public Ship{ // РѕРґРЅРѕРїР°Р»СѓР±РЅС‹Рµ РєРѕСЂР°Р±Р»Рё
       public:
              void Init(int xT, int yT, int prT){
                   Ship::Init(xT,yT,prT);
@@ -249,7 +249,7 @@ std::vector<Ship_1> vShip_1(8);
 
 class Ship_2:public Ship{
       protected:
-             int napr; // направление корабля
+             int napr; // РЅР°РїСЂР°РІР»РµРЅРёРµ РєРѕСЂР°Р±Р»СЏ
       public:
              void Init(int xT, int yT, int n, int prT){
                   Ship::Init(xT,yT,prT);
@@ -261,7 +261,7 @@ std::vector<Ship_2> vShip_2(6);
 
 class Ship_3:public Ship{
       protected:
-             int napr; // направление корабля
+             int napr; // РЅР°РїСЂР°РІР»РµРЅРёРµ РєРѕСЂР°Р±Р»СЏ
       public:
              void Init(int xT, int yT, int n, int prT){
                   Ship::Init(xT,yT,prT);
@@ -273,7 +273,7 @@ std::vector<Ship_3> vShip_3(4);
 
 class Ship_4:public Ship{
       protected:
-             int napr; // направление корабля
+             int napr; // РЅР°РїСЂР°РІР»РµРЅРёРµ РєРѕСЂР°Р±Р»СЏ
       public:
              void Init(int xT, int yT, int n, int prT){
                   Ship::Init(xT,yT,prT);
@@ -284,8 +284,8 @@ int Ship4Init = 0;
 std::vector<Ship_4> vShip_4(2);
 
 void War(Map MyMap, Map WarMap){
-     printf("Да начнется битва!");
-     printf("Введите координаты: ");
+     printf("Р”Р° РЅР°С‡РЅРµС‚СЃСЏ Р±РёС‚РІР°!");
+     printf("Р’РІРµРґРёС‚Рµ РєРѕРѕСЂРґРёРЅР°С‚С‹: ");
      while(1){   
           if(WarMap.GetK() == 0 || MyMap.GetK() == 0) break;
           int x = 0, y = 0; 
@@ -293,16 +293,16 @@ void War(Map MyMap, Map WarMap){
           scanf("%d %d",&x,&y);
           int P = WarMap.Izm(x,y);
           if(P == 0){
-             printf("\nВы уже стреляли в эту ячейку! Повторите:\n");
+             printf("\nР’С‹ СѓР¶Рµ СЃС‚СЂРµР»СЏР»Рё РІ СЌС‚Сѓ СЏС‡РµР№РєСѓ! РџРѕРІС‚РѕСЂРёС‚Рµ:\n");
              goto metka;
           } else if(P == 1){
-             printf("Вы попали!\n");
+             printf("Р’С‹ РїРѕРїР°Р»Рё!\n");
           } else if(P == 2){
-             printf("Мимо!\n"); 
+             printf("РњРёРјРѕ!\n"); 
           } else if(P == 3){
-             printf("Корабль врага уничтожен! :))\n");  
+             printf("РљРѕСЂР°Р±Р»СЊ РІСЂР°РіР° СѓРЅРёС‡С‚РѕР¶РµРЅ! :))\n");  
              WarMap.MinusK();     
-             printf("У врага осталось кораблей: %d\n",WarMap.GetK());
+             printf("РЈ РІСЂР°РіР° РѕСЃС‚Р°Р»РѕСЃСЊ РєРѕСЂР°Р±Р»РµР№: %d\n",WarMap.GetK());
           }
           WarMap.Draw();
           metka8:
@@ -319,43 +319,43 @@ void War(Map MyMap, Map WarMap){
               }       
           }
           P = MyMap.Izm(x,y);
-          int Fl = 0; // сколько раз в невозможное место
+          int Fl = 0; // СЃРєРѕР»СЊРєРѕ СЂР°Р· РІ РЅРµРІРѕР·РјРѕР¶РЅРѕРµ РјРµСЃС‚Рѕ
           if(P == 0){
              Fl++;
              if(Fl == 4){
                   Nastup = NX = NY = Fl = 0;
-                  printf("Наступление окончено!");
+                  printf("РќР°СЃС‚СѓРїР»РµРЅРёРµ РѕРєРѕРЅС‡РµРЅРѕ!");
                   }
              goto metka8;
           } else if(P == 1){
-             printf("Увы, но в ваш корабль попали!\n");
+             printf("РЈРІС‹, РЅРѕ РІ РІР°С€ РєРѕСЂР°Р±Р»СЊ РїРѕРїР°Р»Рё!\n");
              Nastup++;
              NX = x;
              NY = y;
           } else if(P == 2){
-             printf("Уху, враг промахнулся!\n");       
+             printf("РЈС…Сѓ, РІСЂР°Рі РїСЂРѕРјР°С…РЅСѓР»СЃСЏ!\n");       
           } else if(P == 3){
-             printf("Ваш корабль потоплен :((\n");    
+             printf("Р’Р°С€ РєРѕСЂР°Р±Р»СЊ РїРѕС‚РѕРїР»РµРЅ :((\n");    
              Nastup = 0;
              MyMap.MinusK();
-             printf("У вас осталось кораблей: %d\n",MyMap.GetK());
+             printf("РЈ РІР°СЃ РѕСЃС‚Р°Р»РѕСЃСЊ РєРѕСЂР°Р±Р»РµР№: %d\n",MyMap.GetK());
           }
           MyMap.Draw();
      }
      if(MyMap.GetK() == 0){
-          printf("Вы проиграли! :((");                
+          printf("Р’С‹ РїСЂРѕРёРіСЂР°Р»Рё! :((");                
      }
      if(WarMap.GetK() == 0){
-          printf("Вы выиграли! :)");                 
+          printf("Р’С‹ РІС‹РёРіСЂР°Р»Рё! :)");                 
      }
      system("PAUSE");
 }
 
 void Start(){
-    Map map1(25,25);  // первое игровое поле
-    Map map2(350,25); // игровое поле врага
+    Map map1(25,25);  // РїРµСЂРІРѕРµ РёРіСЂРѕРІРѕРµ РїРѕР»Рµ
+    Map map2(350,25); // РёРіСЂРѕРІРѕРµ РїРѕР»Рµ РІСЂР°РіР°
     /*for(int i = 0; i < 4; i++){
-           printf("Разместите 1-нопалубные корабли введя координаты[X Y]:\n");
+           printf("Р Р°Р·РјРµСЃС‚РёС‚Рµ 1-РЅРѕРїР°Р»СѓР±РЅС‹Рµ РєРѕСЂР°Р±Р»Рё РІРІРµРґСЏ РєРѕРѕСЂРґРёРЅР°С‚С‹[X Y]:\n");
            metka:
            int k = 0;
            int b = 0;
@@ -365,13 +365,13 @@ void Start(){
                      Ship1Init++;
                      map1.Draw();
            } else {
-             printf("Невозможно установить! Повторите: ");       
+             printf("РќРµРІРѕР·РјРѕР¶РЅРѕ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ! РџРѕРІС‚РѕСЂРёС‚Рµ: ");       
              goto metka;
            }
     }
-    printf("\n0 - вверх, 1 - вправо, 2 - вниз, 3 - влево\n");
+    printf("\n0 - РІРІРµСЂС…, 1 - РІРїСЂР°РІРѕ, 2 - РІРЅРёР·, 3 - РІР»РµРІРѕ\n");
     for(int i = 0; i < 3; i++){
-           printf("Разместите 2-хпалубные корабли введя координаты [X Y направление]:\n");
+           printf("Р Р°Р·РјРµСЃС‚РёС‚Рµ 2-С…РїР°Р»СѓР±РЅС‹Рµ РєРѕСЂР°Р±Р»Рё РІРІРµРґСЏ РєРѕРѕСЂРґРёРЅР°С‚С‹ [X Y РЅР°РїСЂР°РІР»РµРЅРёРµ]:\n");
            metka1:
            int k = 0;
            int b = 0;
@@ -382,12 +382,12 @@ void Start(){
                       Ship2Init++;
                       map1.Draw();
            } else {
-             printf("Невозможно установить! Повторите: ");       
+             printf("РќРµРІРѕР·РјРѕР¶РЅРѕ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ! РџРѕРІС‚РѕСЂРёС‚Рµ: ");       
              goto metka1;       
            }
     }
     for(int i = 0; i < 2; i++){
-           printf("Разместите 3-хпалубные корабли введя координаты [X Y направление]:\n");
+           printf("Р Р°Р·РјРµСЃС‚РёС‚Рµ 3-С…РїР°Р»СѓР±РЅС‹Рµ РєРѕСЂР°Р±Р»Рё РІРІРµРґСЏ РєРѕРѕСЂРґРёРЅР°С‚С‹ [X Y РЅР°РїСЂР°РІР»РµРЅРёРµ]:\n");
            metka2:
            int k = 0;
            int b = 0;
@@ -398,12 +398,12 @@ void Start(){
                       Ship3Init++;
                       map1.Draw();        
            } else {
-             printf("Невозможно установить! Повторите: ");       
+             printf("РќРµРІРѕР·РјРѕР¶РЅРѕ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ! РџРѕРІС‚РѕСЂРёС‚Рµ: ");       
              goto metka2;       
            } 
     }
     for(int i = 0; i < 1; i++){
-           printf("Разместите 4-хпалубный корабль введя координаты [X Y направление]:\n");
+           printf("Р Р°Р·РјРµСЃС‚РёС‚Рµ 4-С…РїР°Р»СѓР±РЅС‹Р№ РєРѕСЂР°Р±Р»СЊ РІРІРµРґСЏ РєРѕРѕСЂРґРёРЅР°С‚С‹ [X Y РЅР°РїСЂР°РІР»РµРЅРёРµ]:\n");
            metka3:
            int k = 0;
            int b = 0;
@@ -414,7 +414,7 @@ void Start(){
                       Ship3Init++;
                       map1.Draw();        
            } else {
-             printf("Невозможно установить! Повторите:\n");       
+             printf("РќРµРІРѕР·РјРѕР¶РЅРѕ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ! РџРѕРІС‚РѕСЂРёС‚Рµ:\n");       
              goto metka3;       
            } 
     } */
@@ -466,7 +466,7 @@ void Start(){
              goto metka7;      
            } 
     }
-    //Снять комментарий, если лень расставлять самому 
+    //РЎРЅСЏС‚СЊ РєРѕРјРјРµРЅС‚Р°СЂРёР№, РµСЃР»Рё Р»РµРЅСЊ СЂР°СЃСЃС‚Р°РІР»СЏС‚СЊ СЃР°РјРѕРјСѓ 
     srand(time(NULL));   
     for(int i = 0; i < 4; i++){
            metka8:
